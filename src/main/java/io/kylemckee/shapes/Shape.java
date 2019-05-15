@@ -9,18 +9,20 @@ public class Shape {
     protected int label_row;
     protected String label;
     protected char model[][];
+	protected String type;
     
     public Shape () {
     	
     }
     
-    public Shape(String id, int height, int label_row, String label)
+    public Shape(String id, int height, int label_row, String label, String type)
     {
     	this.id = id;
         this.rows = height;
         this.columns = (height * 2) - 1;
         this.label_row = label_row;
         this.label = label;
+        this.type = type;
     }
 
     public char[][] getModel() {
@@ -31,24 +33,32 @@ public class Shape {
 		this.model = model;
 	}
 
-	public Shape(String id, int height, String label)
+	public Shape(String id, int height, String label, String type)
     {
-        this(id, height, 4, label);
+        this(id, height, 4, label, type);
         this.columns = (height * 2) - 1;
     }
     
     
-    public Shape(String id, int height, int label_row)
+    public Shape(String id, int height, int label_row, String type)
     {
-        this(id, height, label_row, "HI");
+        this(id, height, label_row, "HI", type);
         this.columns = (height * 2) - 1;
     }
     
-    public Shape(String id, int height)
+    public Shape(String id, int height, String type)
     {
-        this(id, height, 4, "HI");
+        this(id, height, 4, "HI", type);
         this.columns = (height * 2) - 1;
     }
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getId() {
 		return id;

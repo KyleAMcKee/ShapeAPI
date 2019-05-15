@@ -5,9 +5,9 @@ import java.util.Arrays;
 
 public class Diamond extends Shape
 {
-    public Diamond(String id, int height, int label_row, String label)
+    public Diamond(String id, int height, int label_row, String label, String type)
     {
-        super(id, height, label_row, label);
+        super(id, height, label_row, label, type);
         model = new char[this.rows][this.columns];
         this.clearModel();
         generateModel();

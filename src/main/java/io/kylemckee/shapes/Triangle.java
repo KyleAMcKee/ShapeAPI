@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Triangle extends Shape
 {
-    public Triangle(String id, int height, int label_row, String label)
+    public Triangle(String id, int height, int label_row, String label, String type)
     {
-        super(id, height, label_row, label);
+        super(id, height, label_row, label, type);
         model = new char[this.rows][this.columns];
         this.clearModel();
         generateModel();

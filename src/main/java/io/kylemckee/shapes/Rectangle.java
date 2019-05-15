@@ -7,9 +7,9 @@ public class Rectangle extends Shape
     public int width;
     private static final double WIDTH_FACTOR = 1.618;
 
-    public Rectangle (String id, int height, int label_row, String label)
+    public Rectangle (String id, int height, int label_row, String label, String type)
     {
-        super(id, height, label_row, label);
+        super(id, height, label_row, label, type);
         this.columns = (int) (Math.round(height * WIDTH_FACTOR) * 2) - 1;
         model = new char[this.rows][this.columns];
         this.clearModel();
