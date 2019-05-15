@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kylemckee.shapes.Shape;
 import io.kylemckee.shapes.Square;
+import io.kylemckee.shapes.Triangle;
+import io.kylemckee.shapes.Diamond;
+import io.kylemckee.shapes.Rectangle;
 
 @RestController
 public class ShapeController {
@@ -16,8 +19,9 @@ public class ShapeController {
 	public List<Shape> getAllShapes() {
 		return Arrays.asList(
 					new Square("1", 6, "HEY"),
-					new Square("2", 5, 3, "HI"),
-					new Square("3", 9, 4, "HELLO")				
+					new Rectangle("2", 5, 3, "HI"),
+					new Diamond("3", 9, 4, "HELLO"),
+					new Triangle("4", 9, 4, "HOLA")	
 				);
 	}
 }
