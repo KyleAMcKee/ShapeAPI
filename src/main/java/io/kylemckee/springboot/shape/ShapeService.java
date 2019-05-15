@@ -6,20 +6,28 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import io.kylemckee.shapes.Diamond;
-import io.kylemckee.shapes.Rectangle;
+import io.kylemckee.shapes.Config;
 import io.kylemckee.shapes.Shape;
-import io.kylemckee.shapes.Square;
-import io.kylemckee.shapes.Triangle;
+import io.kylemckee.shapes.ShapeFactory;
+
 
 @Service
 public class ShapeService {
+
+	ShapeFactory shapeFactory = new ShapeFactory();
+	
+	Config squareConfig = new Config(8, 8, "hello");
+	Config triangleConfig = new Config(10, 6, "hola");
+	Config diamondConfig = new Config(3, 2);
+	Config rectangleConfig = new Config(7, 4, "bonjour");
 	List<Shape> shapes = new ArrayList<>(Arrays.asList(
-			new Square("1", 6, "HEY", "Square"),
-			new Rectangle("2", 5, 3, "HI", "Rectangle"),
-			new Diamond("3", 9, 4, "HELLO", "Diamond"),
-			new Triangle("4", 9, 4, "HOLA", "Triangle")	
+			shapeFactory.makeShape("square", squareConfig),
+			shapeFactory.makeShape("triangle", triangleConfig),
+			shapeFactory.makeShape("diamond", diamondConfig),
+			shapeFactory.makeShape("rectangle", rectangleConfig)
 		));
+	
+	
 	
 	public List<Shape> getAllShapes() {
 		return shapes;
@@ -32,51 +40,22 @@ public class ShapeService {
 			.get();
 	}
 	
-	public void addShape(Shape shape) {
-		
-		String id = shape.getId();
-		int rows = shape.getRows();
-		int label_row = shape.getLabel_row();
-		String label = shape.getLabel();
-		String type = shape.getType();
-		
-		switch (type) {
-			case "square": 		shapes.add(new Square(id, rows, label_row, label, type));
-								break;
-			case "rectangle": 	shapes.add(new Rectangle(id, rows, label_row, label, type));
-								break;
-			case "diamond": 	shapes.add(new Diamond(id, rows, label_row, label, type));
-								break;
-			case "triangle": 	shapes.add(new Triangle(id, rows, label_row, label, type));
-								break;
-			default:			shapes.add(new Square(id, 4, 3, "NONE", "square"));
-								break;
-		}
+	public void addShape(Config config) {
+		String type = config.getType();
+		Shape newShape = shapeFactory.makeShape(type, config);
+		shapes.add(newShape);
 	}
-	//TODO Combine logic
-	public void updateShape(String id, Shape shape) {
+	
+	public void updateShape(String id, Config config) {
 		for(int i = 0; i < shapes.size(); i++) {
 			Shape s = shapes.get(i);
 			if (s.getId().equals(id)) {
-				int rows = shape.getRows();
-				int label_row = shape.getLabel_row();
-				String label = shape.getLabel();
-				String type = shape.getType();
-				switch (type) {
-					case "square": 		shapes.set(i, new Square(id, rows, label_row, label, type));
-										break;
-					case "rectangle": 	shapes.set(i, new Rectangle(id, rows, label_row, label, type));
-										break;
-					case "diamond": 	shapes.set(i, new Diamond(id, rows, label_row, label, type));
-										break;
-					case "triangle": 	shapes.set(i, new Triangle(id, rows, label_row, label, type));
-										break;
-					default:			shapes.set(i, new Square(id, 4, 3, "NONE", "square"));
-										break;
-				}
+				shapes.set(i, shapeFactory.makeShape(config.getType(), config));
 			}
 		}
 	}
+	
+	//set(i, new shape)
 
 	public void deleteShape(String id) {
 		shapes.removeIf(s -> s.getId().equals(id));

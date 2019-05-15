@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.kylemckee.shapes.Config;
 import io.kylemckee.shapes.Shape;
 
 @RestController
@@ -28,13 +29,13 @@ public class ShapeController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/shapes")
-	public void addShape(@RequestBody Shape shape) {
-		shapeService.addShape(shape);
+	public void addShape(@RequestBody Config config) {
+		shapeService.addShape(config);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/shapes/{id}")
-	public void updateShape(@RequestBody Shape shape, @PathVariable String id) {
-		shapeService.updateShape(id, shape);
+	public void updateShape(@RequestBody Config config, @PathVariable String id) {
+		shapeService.updateShape(id, config);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/shapes/{id}")
