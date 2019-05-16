@@ -37,7 +37,7 @@ async function fetchData() {
 
     const proxy = "https://cors-anywhere.herokuapp.com/";
     const url = "https://shielded-shelf-21827.herokuapp.com/shapes";
-    const body = JSON.stringify({type: shape.type, rows: shape.rows, label: shape.label, labelRow: shape.labelRow});
+    const body = JSON.stringify({type: shape.type, rows: shape.rows, label: shape.label || "HI", labelRow: shape.labelRow || 4});
     await fetch(proxy + url, {
       method: 'POST',
       headers: {
@@ -57,7 +57,11 @@ async function fetchData() {
         'Content-Type': 'application/json'
       },
     });
-    setShapes(shapes.filter(shape => shape.id !== id))
+    let displayId = currentShape.id
+    setShapes(shapes.filter(shape => shape.id !== id));
+    if (id === displayId) {
+      setDisplay(false);
+    }
   }
 
   const updateShapeForm = shape => {
@@ -71,7 +75,7 @@ async function fetchData() {
     setEditing(false);
     const proxy = "https://cors-anywhere.herokuapp.com/";
     const url = "https://shielded-shelf-21827.herokuapp.com/shapes";
-    const body = JSON.stringify({type: shape.type, rows: shape.rows, label: shape.label, labelRow: shape.labelRow});
+    const body = JSON.stringify({type: shape.type, rows: shape.rows, label: shape.label || "HI", labelRow: shape.labelRow || 4});
     await fetch(proxy + url + '/' + id, {
       method: 'PUT',
       headers: {
@@ -80,7 +84,6 @@ async function fetchData() {
       body: body
     });
     fetchData();
-    setDisplay(false);
   }
 
   const showShape = (shape) => {
@@ -90,7 +93,7 @@ async function fetchData() {
 
   const renderShape = () => {
     let shape = displayShape.model;
-    return shape.map(row => <div style={{whiteSpace: 'pre'}}>{row}</div>);
+    return shape.map((row, idx) => <div key={idx} style={{whiteSpace: 'pre'}}>{row}</div>);
   }
 
   return (
@@ -117,13 +120,13 @@ async function fetchData() {
       </div>
         <div className="flex-large">
           <h2>View Shapes</h2>
-          <ShapeTable shapes={shapes} updateShapeForm={updateShapeForm} deleteShape={deleteShape} showShape={showShape}/>
+          {loading ? <div>loading...</div> : <ShapeTable shapes={shapes} updateShapeForm={updateShapeForm} deleteShape={deleteShape} showShape={showShape}/>}
         </div>
       </div>
       <div className="flex-row">
         <div className="flex-large">
           <h2>Display Shape</h2>
-          {display ? <div>{renderShape()}</div> : <div>Click show to display a shape</div>}
+          {display ? <div style={{fontFamily: 'monospace, monospace'}}>{renderShape()}</div> : <div>Click show to display a shape</div>}
         </div>
       </div>
     </div>
@@ -131,3 +134,5 @@ async function fetchData() {
 }
 
 export default App;
+
+//auto render on update
