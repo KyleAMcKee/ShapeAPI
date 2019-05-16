@@ -13,11 +13,11 @@ const App = () => {
   const [display, setDisplay] = useState(false);
   const [displayShape, setDisplayShape] = useState(null);
 
-  
+  const proxy = "https://cors-anywhere.herokuapp.com/";
+  //const proxy = ''
+  const url = "https://shielded-shelf-21827.herokuapp.com/shapes/";
 
 async function fetchData() {
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'https://shielded-shelf-21827.herokuapp.com/shapes/';
     try {
         const response = await fetch(proxy + url);
         const data = await response.json();
@@ -34,9 +34,6 @@ async function fetchData() {
 
   const addShape = async shape => {
     if (!shape.rows || !shape.type ) return;
-
-    const proxy = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://shielded-shelf-21827.herokuapp.com/shapes";
     const body = JSON.stringify({type: shape.type, rows: shape.rows, label: shape.label || "HI", labelRow: shape.labelRow || 4});
     await fetch(proxy + url, {
       method: 'POST',
@@ -49,8 +46,6 @@ async function fetchData() {
   }
 
   const deleteShape = id => {
-    const proxy = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://shielded-shelf-21827.herokuapp.com/shapes";
     fetch(proxy + url + '/' + id, {
       method: 'DELETE',
       headers: {
@@ -73,8 +68,6 @@ async function fetchData() {
 
   const updateShape = async (id, shape) => {
     setEditing(false);
-    const proxy = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://shielded-shelf-21827.herokuapp.com/shapes";
     const body = JSON.stringify({type: shape.type, rows: shape.rows, label: shape.label || "HI", labelRow: shape.labelRow || 4});
     await fetch(proxy + url + '/' + id, {
       method: 'PUT',
