@@ -3,6 +3,9 @@ package io.kylemckee.shapes;
 
 import java.util.Arrays;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Diamond extends Shape
 {
     public Diamond() {
@@ -11,7 +14,7 @@ public class Diamond extends Shape
 
     public Diamond(int rows, int labelRow, String label) {
         setType("diamond");
-        this.rows = rows;
+        this.height = rows;
         this.labelRow = labelRow;
         this.label = label.toUpperCase();
         this.columns = rows + 1;
@@ -21,7 +24,7 @@ public class Diamond extends Shape
 
     public void fillModel()
     {
-        for (int i = 0; i <= this.rows / 2; i++)
+        for (int i = 0; i <= this.height / 2; i++)
         {
             int k = 0;
             for (int j = (this.columns / 2) - i; k <= i; j += 2)
@@ -30,8 +33,8 @@ public class Diamond extends Shape
                 k++;
             }
         }
-        int j = (this.rows / 2) - 1;
-        for (int i = (this.rows / 2) + 1; i < this.rows; i++)
+        int j = (this.height / 2) - 1;
+        for (int i = (this.height / 2) + 1; i < this.height; i++)
         {
             model[i] = Arrays.copyOf(model[j], model[j].length);
             j--;
@@ -42,7 +45,7 @@ public class Diamond extends Shape
     {
         int startIdx = 0;
         int letterIdx = 0;
-        int availableSpots = labelRow <= (rows / 2) + 1 ? rows / 2 + 1 : rows - labelRow + 1;
+        int availableSpots = labelRow <= (height / 2) + 1 ? height / 2 + 1 : height - labelRow + 1;
         System.out.println(availableSpots); 
 
         while (model[labelRow - 1][startIdx] != 'X')
@@ -72,14 +75,14 @@ public class Diamond extends Shape
 
     public void initModel()
     {
-        model = new char[this.rows][this.columns];
+        model = new char[this.height][this.columns];
         this.clearModel();
     }
 
     public void generateModel() {
         initModel();
         fillModel();
-        if (labelRow <= rows)
+        if (labelRow <= height)
         {
             addLabel();
         }

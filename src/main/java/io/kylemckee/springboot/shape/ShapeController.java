@@ -1,6 +1,7 @@
 package io.kylemckee.springboot.shape;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class ShapeController {
 	}
 	
 	@RequestMapping("/shapes/{id}")
-	public Shape getShape(@PathVariable String id) {
+	public Optional<Shape> getShape(@PathVariable Long id) {
 		return shapeService.getShape(id);
 	}
 	
@@ -34,12 +35,12 @@ public class ShapeController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/shapes/{id}")
-	public void updateShape(@RequestBody Config config, @PathVariable String id) {
+	public void updateShape(@RequestBody Config config, @PathVariable Long id) {
 		shapeService.updateShape(id, config);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/shapes/{id}")
-	public void deleteShape(@PathVariable String id) {
+	public void deleteShape(@PathVariable Long id) {
 		shapeService.deleteShape(id);
 	}
 }

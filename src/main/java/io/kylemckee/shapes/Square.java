@@ -1,22 +1,25 @@
 package io.kylemckee.shapes;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Square extends Shape {
 	
     public Square() {} ;
 
     public Square(int rows, int labelRow, String label) {
         setType("square");
-        this.rows = rows;
+        this.height = rows;
         this.labelRow = labelRow;
         this.label = label.toUpperCase();
-        this.columns = (rows * 2) - 1;
+        this.columns = (height * 2) - 1;
 
         generateModel();
     }
 
     public void fillModel()
     {
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < columns; j++)
             {
@@ -27,7 +30,7 @@ public class Square extends Shape {
 
     public void initModel()
     {
-        model = new char[this.rows][this.columns];
+        model = new char[this.height][this.columns];
         this.clearModel();
     }
 
@@ -36,8 +39,8 @@ public class Square extends Shape {
         int startIdx = 0;
         int letterIdx = 0;
 
-        if (label.length() < this.rows) {
-            startIdx = (this.rows - label.length()) - 1;
+        if (label.length() < this.height) {
+            startIdx = (this.height - label.length()) - 1;
         }
         for (int i = startIdx; i < this.columns; i++)
         {
@@ -55,7 +58,7 @@ public class Square extends Shape {
     public void generateModel() {
         initModel();
         fillModel();
-        if (labelRow <= rows)
+        if (labelRow <= height)
         {
             addLabel();
         }

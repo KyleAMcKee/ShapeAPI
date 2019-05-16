@@ -1,7 +1,8 @@
 package io.kylemckee.shapes;
 
-import java.util.Arrays;
+import javax.persistence.Entity;
 
+@Entity
 public class Triangle extends Shape
 {
     public Triangle() {
@@ -10,17 +11,17 @@ public class Triangle extends Shape
 
     public Triangle(int rows, int labelRow, String label) {
         setType("triangle");
-        this.rows = rows;
+        this.height = rows;
         this.labelRow = labelRow;
         this.label = label.toUpperCase();
-        this.columns = (rows * 2) - 1;
+        this.columns = (height * 2) - 1;
 
         generateModel();
     }
 
     public void fillModel()
     {
-        for (int i = 0; i < this.rows; i++)
+        for (int i = 0; i < this.height; i++)
         {
             int k = 0;
             for (int j = (this.columns / 2) - i; k <= i; j += 2)
@@ -63,14 +64,14 @@ public class Triangle extends Shape
 
     public void initModel()
     {
-        model = new char[this.rows][this.columns];
+        model = new char[this.height][this.columns];
         this.clearModel();
     }
 
     public void generateModel() {
         initModel();
         fillModel();
-        if (labelRow <= rows)
+        if (labelRow <= height)
         {
             addLabel();
         }

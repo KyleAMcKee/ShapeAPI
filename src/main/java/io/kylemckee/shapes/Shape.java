@@ -3,28 +3,35 @@ package io.kylemckee.shapes;
 import java.util.Arrays;
 import java.util.UUID;
 
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-//@Entity
-public class Shape {
+
+@Entity
+public abstract class Shape {
 	
-	//@Id
-    protected String Id = UUID.randomUUID().toString();
-    protected int rows = 6;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+    protected long Id;
+    protected int height = 6;
     protected int columns = 11;
     protected int labelRow = 4;
     protected String label = "HI";
     protected String type;
+    @Column(length = 8192)
     protected char[][] model;
 
-    public int getRows() { return rows; }
-    public void setRows(int rows) { this.rows = rows; }
+    public int getHeight() { return height; }
+    public void setHeight(int height) { this.height = height; }
 
     public String getLabel() { return label; }
     public void setLabel(String label) { this.label = label; }
     
-    public String getId() { return Id; }
+    public long getId() { return Id; }
+    public void setId(long id) { this.Id = id; }
 
 	public int getColumns() { return columns; }
 	public void setColumns(int columns) { this.columns = columns; }
@@ -40,7 +47,7 @@ public class Shape {
 
     protected void clearModel()
     {
-        for (int i = 0; i < this.rows; i++)
+        for (int i = 0; i < this.height; i++)
         {
             Arrays.fill(model[i], ' ');
         }
@@ -48,7 +55,7 @@ public class Shape {
 
     public void printModel()
     {
-        for (int i = 0; i < this.rows; i++)
+        for (int i = 0; i < this.height; i++)
         {
             for (int j = 0; j < this.columns; j++)
             {

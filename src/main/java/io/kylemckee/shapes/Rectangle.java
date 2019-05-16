@@ -2,24 +2,31 @@ package io.kylemckee.shapes;
 
 import java.lang.Math;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Rectangle extends Shape
 {
     private static final double WIDTH_FACTOR = 1.618;
+    
+    public Rectangle() {
+    	
+    }
 
     public Rectangle (int rows, int labelRow, String label)
     {
         setType("rectangle");
-        this.rows = rows;
+        this.height = rows;
         this.labelRow = labelRow;
         this.label = label.toUpperCase();
-        this.columns = (int) (Math.round(rows * WIDTH_FACTOR) * 2) - 1;
+        this.columns = (int) (Math.round(height * WIDTH_FACTOR) * 2) - 1;
 
         generateModel();
     }
 
     public void fillModel()
     {
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < columns; j++)
             {
@@ -51,14 +58,14 @@ public class Rectangle extends Shape
 
     public void initModel()
     {
-        model = new char[this.rows][this.columns];
+        model = new char[this.height][this.columns];
         this.clearModel();
     }
 
     public void generateModel() {
         initModel();
         fillModel();
-        if (labelRow <= rows)
+        if (labelRow <= height)
         {
             addLabel();
         }
