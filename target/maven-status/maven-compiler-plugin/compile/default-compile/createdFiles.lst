@@ -1,0 +1,11 @@
+io\kylemckee\springboot\shape\ShapeService.class
+io\kylemckee\shapes\Triangle.class
+io\kylemckee\springboot\shape\ShapeRepository.class
+io\kylemckee\shapes\ShapeFactory.class
+io\kylemckee\shapes\Config.class
+io\kylemckee\springboot\shape\ShapeController.class
+io\kylemckee\shapes\Diamond.class
+io\kylemckee\springboot\ShapeApiApp.class
+io\kylemckee\shapes\Shape.class
+io\kylemckee\shapes\Rectangle.class
+io\kylemckee\shapes\Square.class
