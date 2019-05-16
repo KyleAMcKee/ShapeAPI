@@ -9,9 +9,14 @@ const AddShapeForm = props => {
         setShape({ ...shape, [name]: value });
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
         event.preventDefault();
         props.addShape(shape);
+        setShape(initialFormState);
+    }
+
+    const handleSelect = event => {
+       setShape({...shape, type: event.target.value});
     }
 
     return (
@@ -23,7 +28,13 @@ const AddShapeForm = props => {
             <label>Rows</label>
             <input min="1" max="30" type="number" name="rows" value={shape.rows} onChange={handleInputChange} />
             <label>Type</label>
-            <input type="text" name="type" value={shape.type} onChange={handleInputChange} />
+            <select onChange={handleSelect}>
+                <option value="" disabled selected>Select a shape</option>
+                <option value="square">Square</option>
+                <option value="rectangle">Rectangle</option>
+                <option value="triangle">Triangle</option>
+                <option value="diamond">Diamond</option>
+            </select>
             <button type="submit">Add new shape</button>
         </form>
     )
