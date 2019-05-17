@@ -71,6 +71,7 @@ Server can be reached at http://localhost:8080
 * [Spring Boot](https://spring.io/projects/spring-boot) - Java web framework
 * [React](https://reactjs.org/) - JavaScript user interface library
 * [Apache Derby](https://db.apache.org/derby/) - Open source relational database
+* [Maven](https://maven.apache.org/) - Build Management
 
 ## License
 
