@@ -62,3 +62,16 @@ cd <name>/client
 npm run start
 ```
 
+You'll now be able to interact with the server through forms at http://localhost:3000
+
+Server can be reached at http://localhost:8080
+
+## Built With
+
+* [Spring Boot](https://spring.io/projects/spring-boot) - Java web framework
+* [React](https://reactjs.org/) - JavaScript user interface library
+* [Apache Derby](https://db.apache.org/derby/) - Open source relational database
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
