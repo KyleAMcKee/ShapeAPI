@@ -35,6 +35,7 @@ async function fetchData() {
 
   const addShape = async shape => {
     if (!shape.rows || !shape.type ) return;
+    shape.label = shape.label.replace(/[^0-9a-z]/gi, '');
     const body = JSON.stringify({type: shape.type, rows: shape.rows, label: shape.label || "HI", labelRow: shape.labelRow || 4});
     await fetch(proxy + url, {
       method: 'POST',
@@ -69,6 +70,7 @@ async function fetchData() {
 
   const updateShape = async (id, shape) => {
     setEditing(false);
+    shape.label = shape.label.replace(/[^0-9a-z]/gi, '');
     const body = JSON.stringify({type: shape.type, rows: shape.rows, label: shape.label || "HI", labelRow: shape.labelRow || 4});
     await fetch(proxy + url + '/' + id, {
       method: 'PUT',
