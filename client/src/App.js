@@ -13,9 +13,10 @@ const App = () => {
   const [display, setDisplay] = useState(false);
   const [displayShape, setDisplayShape] = useState(null);
 
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  //const proxy = ''
-  const url = "https://shielded-shelf-21827.herokuapp.com/shapes/";
+  //const proxy = "https://cors-anywhere.herokuapp.com/";
+  const proxy = ''
+  //const url = "https://shielded-shelf-21827.herokuapp.com/shapes/";
+  const url = 'http://localhost:8080/shapes/';
 
 async function fetchData() {
     try {
